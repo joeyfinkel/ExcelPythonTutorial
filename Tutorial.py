@@ -61,17 +61,17 @@ def convert(lst):
     result = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
     return result
 
-pprint.pprint(convert(data))
+# pprint.pprint(convert(data))
 
+new_data = convert(data)
 headings = ['ID'] + list(data[1].keys())
 # ws2.append(headings)
-
-# for person in data:
-#     print(list(data[person]))
-    # name = list(data[person].values())
-    # ws2.append([person] + name)
+# print(convert(data))
+for person in new_data:
+	info = list(new_data[person].values())
+	ws2.append([person] + name)
     # print([person] + name)
-# new_grades_book.save('New Grades.xlsx')
+new_grades_book.save('New Grades.xlsx')
 
 data2 = {
 	"Joe": {
@@ -105,7 +105,3 @@ data2 = {
 		"gym": 60
 	}
 }
-
-for person in data2:
-    grades = list(data[person].values())
-    print(grades)
