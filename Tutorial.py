@@ -1,5 +1,6 @@
 import json
 import itertools
+import pprint
 from collections import defaultdict
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
@@ -54,32 +55,57 @@ for key, value in zip(new_list[0::2], new_list[1::2]):
     values = dict(zip([key], [value]))
     results.append(values)
 
-d = []
-data = {}
-for result in results:
-    print(get_column(0, ws, 2))
-    # data = dict(zip([i for i in get_column(0, ws, 2)], [result]))
-    # data = {i:result for i in get_column(0, ws, 2)}
+data = list(insert_every_n(get_column(0, ws, 2), results, k=1))
 
-    # print(result)
+def convert(lst):
+    result = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    return result
 
-# data = {i:result for i in get_column(0, ws, 2)}
-    # print(data)
-# headings = ['ID'] + list(data[1].keys())
+pprint.pprint(convert(data))
+
+headings = ['ID'] + list(data[1].keys())
 # ws2.append(headings)
-# print(names)
-# print(headings)
 
 # for person in data:
-#     name = list(data[person].values())
-#     ws2.append([person] + name)
-
-
-# print(names)
-# populate_col(ws, 2)
-# for c in get_column(0):
-#     r = 1
-#     ws.cell(row = r + 1, column = 1).value = c
+#     print(list(data[person]))
+    # name = list(data[person].values())
+    # ws2.append([person] + name)
+    # print([person] + name)
 # new_grades_book.save('New Grades.xlsx')
-# umn):
-#     ws2.cell(row = 2, column = 1, value = 'HELLO')\
+
+data2 = {
+	"Joe": {
+		"math": 65,
+		"science": 78,
+		"english": 98,
+		"gym": 89
+	},
+	"Bill": {
+		"math": 55,
+		"science": 72,
+		"english": 87,
+		"gym": 95
+	},
+	"Tim": {
+		"math": 100,
+		"science": 45,
+		"english": 75,
+		"gym": 92
+	},
+	"Sally": {
+		"math": 30,
+		"science": 25,
+		"english": 45,
+		"gym": 100
+	},
+	"Jane": {
+		"math": 100,
+		"science": 100,
+		"english": 100,
+		"gym": 60
+	}
+}
+
+for person in data2:
+    grades = list(data[person].values())
+    print(grades)
